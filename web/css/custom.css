@@ -1,0 +1,208 @@
+												li{list-style-type: '';}
+
+					    						ul{list-style-type: '';}
+
+					                            .round-corners {
+		                                            border-radius: 25px;
+		                                            // background: #c3c388;
+		                                            padding: 20px;
+		                                            display: inline-block;
+		                                            border:4px solid #aaaa55;
+		                                        }
+		                                        #loader {
+												  position: relative;
+												  left: 50%;
+												  bottom: 10%;
+												  z-index: 1;
+												  width: 150px;
+												  height: 150px;
+												  margin: -75px 0 0 -75px;
+												  border: 16px solid #f3f3f3;
+												  border-radius: 50%;
+												  border-top: 16px solid  #3498db;
+ 												  border-bottom: 16px solid  #3498db;
+												  // border-top: 16px solid blue;
+													 // border-right: 16px solid green;
+													 // border-bottom: 16px solid red;
+													 // border-left: 16px solid pink;
+												  width: 70px;
+												  height: 70px;
+												  -webkit-animation: spin 2s linear infinite;
+												  animation: spin 2s linear infinite;
+												}
+
+												@-webkit-keyframes spin {
+												  0% { -webkit-transform: rotate(0deg); }
+												  100% { -webkit-transform: rotate(360deg); }
+												}
+
+												@keyframes spin {
+												  0% { transform: rotate(0deg); }
+												  100% { transform: rotate(360deg); }
+												}
+
+												.animate-bottom {
+												  position: relative;
+												  -webkit-animation-name: animatebottom;
+												  -webkit-animation-duration: 1s;
+												  animation-name: animatebottom;
+												  animation-duration: 1s
+												}
+
+												@-webkit-keyframes animatebottom {
+												  from { bottom:-100px; opacity:0 } 
+												  to { bottom:0px; opacity:1 }
+												}
+
+												@keyframes animatebottom { 
+												  from{ bottom:-100px; opacity:0 } 
+												  to{ bottom:0; opacity:1 }
+												}
+
+
+												.fixed {
+												    position: fixed;
+												    bottom: 7%;
+												    right: 4%;
+												    width: 5%;
+												    border: 3px solid #73AD21;
+												}
+
+
+					    						.round-corners-fixed {
+					                                border-radius: 50%;
+					                                background: #A4FBA6;
+					                                opacity: .7;
+					                                padding: 15px;
+					                                display: inline-block;
+					                            	border:4px solid #aaaa55;
+					                            }
+					                            .tooltip {
+												    position: relative;
+												    display: inline-block;
+												    border-bottom: 1px dotted black;
+												}
+
+												.tooltiptext {
+												    visibility: hidden;
+												    width: 120px;
+												    background-color: pink;
+												    color: blue;
+												    text-align: center;
+												    border-radius: 6px;
+												    padding: 5px 0;
+
+												    /* Position the tooltip */
+												    position: absolute;
+												    z-index: 1;
+												    width: 120px;
+												    bottom: 100%;
+												    left: 50%;
+												    margin-left: -60px;
+												}
+
+												#btn-go-to-top:hover .tooltiptext {
+												    visibility: visible;
+												}
+
+												.tooltiptext::after {
+												    content: ' ';
+												    position: absolute;
+												    top: 100%; /* At the bottom of the tooltip */
+												    left: 50%;
+												    margin-left: -5px;
+												    border-width: 5px;
+												    border-style: solid;
+												    border-color: black transparent transparent transparent;
+												}
+
+
+												#btn-go-to-top {
+												  opacity: .6;
+												  width:4%;
+												  height:8%;
+												  display: none;
+												  position: fixed;
+												  bottom: 5%;
+												  right: 3%;
+												  z-index: 99;
+												  border: none;
+												  outline: none;
+												  background-color: red;
+												  color: white;
+												  cursor: pointer;
+												  padding: 10px;
+												  border-radius: 50%;
+												}
+
+												#btn-go-to-top:hover {
+												  opacity: 1;
+												}
+												.top {
+												    transition: all 0.5s ease 0s;
+												    -moz-transition: all 0.5s ease 0s;
+												    -webkit-transition: all 0.5s ease 0s;
+												    -o-transition: all 0.5s ease 0s;
+												}
+
+
+												.dropbtn {
+												    background-color: #222222;
+												    color: #9D9D9D;
+												    padding: 15px;
+												    font-size: 14px;
+												    border: none;
+												    cursor: pointer;
+												}
+
+
+												.dropdown {
+												    position: relative;
+												    display: inline-block;
+												}
+
+
+												.dropdown-content {
+												    display: none;
+												    position: absolute;
+												    background-color: #f9f9f9;
+												    min-width: 150px;
+												    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+												    z-index: 1;
+												}
+
+
+												.dropdown-content a {
+												    color: black;
+												    padding: 8px 8px;
+												    text-decoration: none;
+												    display: block;
+												}
+
+
+												.dropdown-content a:hover {background-color: #A8B9A8}
+
+
+												.dropdown:hover .dropdown-content {
+												    display: block;
+												}
+
+
+												.dropdown:hover .dropbtn {
+												    background-color: #222222;
+												    color: white;
+												    size:20;
+												}
+
+												.linker {
+													color: black;
+													background-color: white;
+													width: 100%;
+													border-radius: 0;
+													text-align: left;
+													padding-left: 5%;
+												}
+
+												.linker:hover {
+													background-color: #A8B9A8;
+												}

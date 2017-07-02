@@ -1,0 +1,5 @@
+{
+    "require": {
+        "aki/yii2-image-slider": "*"
+    }
+}
