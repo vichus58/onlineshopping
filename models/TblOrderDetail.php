@@ -113,23 +113,20 @@ class TblOrderDetail extends \yii\db\ActiveRecord
                 ->one();
     }
 
-    public function getfullOrder()
+    public function getfullOrder($id)
     {
-        $query = new Query; 
-        return new ActiveDataProvider([
-            'query' => $query
-                            ->select(['tbl_order.pk_int_order_id', 'tbl_product.pk_int_product_id' , 'tbl_product.vchr_item_name', 'tbl_product.int_item_price' , 'tbl_status.vchr_status' , 'tbl_order_detail.int_quantity'])
-                            ->from('tbl_order_detail')
-                            ->join( 'INNER JOIN', 'tbl_order', 'tbl_order.pk_int_order_id = tbl_order_detail.fk_int_order_id')
-                            ->join('INNER JOIN', 'tbl_order_detail_status', 'tbl_order_detail_status.fk_int_order_detail_id = tbl_order_detail.pk_int_order_detail_id')
-                            ->join('INNER JOIN', 'tbl_status', 'tbl_status.pk_int_status_id = tbl_order_detail.fk_int_status_id')
-                            ->join('INNER JOIN', 'tbl_product', 'tbl_product.pk_int_product_id = tbl_order_detail.fk_int_product_id')
-                            ->where(['fk_int_customer_id'=> Yii::$app->user->identity->pk_int_customer_id])
-                            ->orderBy('tbl_order_detail.fk_int_order_id desc'),
-            'pagination' => [
-                    'pageSize' => 20,
-                ],
-        ]);
+
+        return TblOrderDetail::find()
+                // ->select(['tbl_order.pk_int_order_id', 'tbl_product.pk_int_product_id' , 'tbl_product.vchr_item_name', 'tbl_product.int_item_price' , 'tbl_status.vchr_status' , 'tbl_order_detail.int_quantity'])
+                ->leftJoin('tbl_order', 'tbl_order.pk_int_order_id = tbl_order_detail.fk_int_order_id')
+                ->leftJoin('tbl_order_detail_status', 'tbl_order_detail_status.fk_int_order_detail_id = tbl_order_detail.pk_int_order_detail_id')
+                ->leftJoin('tbl_status', 'tbl_status.pk_int_status_id = tbl_order_detail.fk_int_status_id')
+                ->leftJoin('tbl_product', 'tbl_product.pk_int_product_id = tbl_order_detail.fk_int_product_id')
+                ->where(['tbl_order_detail.fk_int_order_id' => $id])
+                ->orderBy('tbl_order_detail.fk_int_order_id desc')
+                ->all();
+
+       
     }
     
 
@@ -137,27 +134,25 @@ class TblOrderDetail extends \yii\db\ActiveRecord
 
     public function getfullOrderAdmin()
     {
-        $query = new Query; 
-        return new ActiveDataProvider([
-            'query' => $query
-                            ->select(['tbl_order.pk_int_order_id', 'tbl_product.pk_int_product_id' , 'tbl_product.vchr_item_name', 'tbl_product.int_item_price' , 'tbl_status.vchr_status' , 'tbl_status.pk_int_status_id' , 'tbl_order_detail.int_quantity'])
-                            ->from('tbl_order_detail')
-                            ->join( 'INNER JOIN', 'tbl_order', 'tbl_order.pk_int_order_id = tbl_order_detail.fk_int_order_id')
-                            ->join('INNER JOIN', 'tbl_order_detail_status', 'tbl_order_detail_status.fk_int_order_detail_id = tbl_order_detail.pk_int_order_detail_id')
-                            ->join('INNER JOIN', 'tbl_status', 'tbl_status.pk_int_status_id = tbl_order_detail.fk_int_status_id')
-                            ->join('INNER JOIN', 'tbl_product', 'tbl_product.pk_int_product_id = tbl_order_detail.fk_int_product_id')
-                            ->orderBy('tbl_order_detail.fk_int_order_id desc'),
-            'pagination' => [
-                    'pageSize' => 20,
-                ],
-        ]);
+        return TblOrderDetail::find()
+                // ->select(['tbl_order.pk_int_order_id', 'tbl_product.pk_int_product_id' , 'tbl_product.vchr_item_name', 'tbl_product.int_item_price' , 'tbl_status.vchr_status' , 'tbl_order_detail.int_quantity'])
+                ->leftJoin('tbl_order', 'tbl_order.pk_int_order_id = tbl_order_detail.fk_int_order_id')
+                ->leftJoin('tbl_order_detail_status', 'tbl_order_detail_status.fk_int_order_detail_id = tbl_order_detail.pk_int_order_detail_id')
+                ->leftJoin('tbl_status', 'tbl_status.pk_int_status_id = tbl_order_detail.fk_int_status_id')
+                ->leftJoin('tbl_product', 'tbl_product.pk_int_product_id = tbl_order_detail.fk_int_product_id')
+                ->where(['tbl_order_detail.fk_int_order_id' => $id])
+                ->orderBy('tbl_order_detail.fk_int_order_id desc')
+                ->all();
     }
-
-
 
     public function getById($id)
     {
-        return TblOrderDetail::find()->where(['fk_int_order_id' => $id])->one();
+        return TblOrderDetail::find()->where(['fk_int_order_id' => $id])->all();
+    }
+
+    public function getByDetailId($id)
+    {
+        return TblOrderDetail::find()->where(['pk_int_order_detail_id' => $id])->one();
     }
 
 }

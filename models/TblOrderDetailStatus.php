@@ -82,6 +82,6 @@ class TblOrderDetailStatus extends \yii\db\ActiveRecord
 
     public function getById($id)
     {
-        return TblOrderDetailStatus::find()->where(['fk_int_order_id' => $id])->one();
+        return TblOrderDetailStatus::find()->where(['fk_int_order_detail_id' => $id])->one();
     }
 }

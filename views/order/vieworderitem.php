@@ -27,13 +27,14 @@ $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
                        ");
     ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
 </head>
 <body>
 <div class="container">
+
+<?php foreach ($models as $model) { ?>
    <div class="row">
       <div class="col-md-6">
         <figure>
@@ -97,89 +98,89 @@ $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
                 </div>
                 <div class="col-lg-6">
                 <?php
-                    $css='';
-                                            if($model->fkIntStatus->vchr_status=='Pending'){
-                                                $css.=".btn-colour-pending{
-                                                                background-color:#30cb00;
-                                                            }
-                                                            a {
-                                                                color: #000000;
-                                                            }";
-                                            } else {
-                                                $css.=".btn-colour-pending{
-                                                                background-color: #5BC0DE;
-                                                            }
-                                                            a {
-                                                                color: #000000;
-                                                            }";
-                                            }
+                    // $css='';
+                    //                         if($model->fkIntStatus->vchr_status=='Pending'){
+                    //                             $css.=".btn-colour-pending{
+                    //                                             background-color:#30cb00;
+                    //                                         }
+                    //                                         a {
+                    //                                             color: #000000;
+                    //                                         }";
+                    //                         } else {
+                    //                             $css.=".btn-colour-pending{
+                    //                                             background-color: #5BC0DE;
+                    //                                         }
+                    //                                         a {
+                    //                                             color: #000000;
+                    //                                         }";
+                    //                         }
 
-                                            if($model->fkIntStatus->vchr_status=='Packed'){
-                                                $css.=".btn-colour-packed{
-                                                                background-color:#30cb00;
-                                                            }
-                                                            a {
-                                                                color: #000000;
-                                                            }";
-                                            } else {
-                                                $css.=".btn-colour-packed{
-                                                                background-color: #5BC0DE;
-                                                            }
-                                                            a {
-                                                                color: #000000;
-                                                            }";
-                                            }
+                    //                         if($model->fkIntStatus->vchr_status=='Packed'){
+                    //                             $css.=".btn-colour-packed{
+                    //                                             background-color:#30cb00;
+                    //                                         }
+                    //                                         a {
+                    //                                             color: #000000;
+                    //                                         }";
+                    //                         } else {
+                    //                             $css.=".btn-colour-packed{
+                    //                                             background-color: #5BC0DE;
+                    //                                         }
+                    //                                         a {
+                    //                                             color: #000000;
+                    //                                         }";
+                    //                         }
 
-                                            if($model->fkIntStatus->vchr_status=='Shipped'){
-                                                $css.=".btn-colour-shipped{
-                                                                background-color:#30cb00;
-                                                            }
-                                                            a {
-                                                                color: #000000;
-                                                            }";
-                                            } else {
-                                                $css.=".btn-colour-shipped{
-                                                                background-color: #5BC0DE;
-                                                            }
-                                                            a {
-                                                                color: #000000;
-                                                            }";
-                                            }
+                    //                         if($model->fkIntStatus->vchr_status=='Shipped'){
+                    //                             $css.=".btn-colour-shipped{
+                    //                                             background-color:#30cb00;
+                    //                                         }
+                    //                                         a {
+                    //                                             color: #000000;
+                    //                                         }";
+                    //                         } else {
+                    //                             $css.=".btn-colour-shipped{
+                    //                                             background-color: #5BC0DE;
+                    //                                         }
+                    //                                         a {
+                    //                                             color: #000000;
+                    //                                         }";
+                    //                         }
 
-                                            if($model->fkIntStatus->vchr_status=='Arrived'){
-                                                $css.=".btn-colour-arrived{
-                                                                background-color:#30cb00;
-                                                            }
-                                                            a {
-                                                                color: #000000;
-                                                            }";
-                                            } else {
-                                                $css.=".btn-colour-arrived{
-                                                                background-color: #5BC0DE;
-                                                            }
-                                                            a {
-                                                                color: #000000;
-                                                            }";
-                                            }
+                    //                         if($model->fkIntStatus->vchr_status=='Arrived'){
+                    //                             $css.=".btn-colour-arrived{
+                    //                                             background-color:#30cb00;
+                    //                                         }
+                    //                                         a {
+                    //                                             color: #000000;
+                    //                                         }";
+                    //                         } else {
+                    //                             $css.=".btn-colour-arrived{
+                    //                                             background-color: #5BC0DE;
+                    //                                         }
+                    //                                         a {
+                    //                                             color: #000000;
+                    //                                         }";
+                    //                         }
                 
-                        $this->registerCss(
-                                            $css
-                                           );
+                    //     $this->registerCss(
+                    //                         $css
+                    //                        );
                 ?>
                 <br>
                 <h4>Status</h4>
                 <div class="row">
                     <div class="col-lg-6">
-                       <a class = "btn btn-colour-pending" style="padding: 2px;width: 50%;" id="btnpending">Pending</a> 
-                       <a class = "btn btn-colour-packed" style="padding: 2px;width: 46%;" id="btnpacked">Packed</a>
+                       <a class = "btn" style="padding: 2px;width: 50%;" id="btnpending<?= $model->pk_int_order_detail_id ?>">Pending</a> 
+                       <a class = "btn" style="padding: 2px;width: 46%;" id="btnpacked<?= $model->pk_int_order_detail_id ?>">Packed</a>
                     </div>
                 </div>
                 <div class="row" style="padding-top: 3px;">
                     <div class="col-lg-6">
-                       <a class = "btn btn-colour-shipped" style="padding: 2px;width: 50%;" id="btnshipped">Shipped</a>
-                       <a class = "btn btn-colour-arrived" style="padding: 2px;width: 46%;" id="btnarrived">Arrived</a>
+                       <a class = "btn" style="padding: 2px;width: 50%;" id="btnshipped<?= $model->pk_int_order_detail_id ?>">Shipped</a>
+                       <a class = "btn" style="padding: 2px;width: 46%;" id="btnarrived<?= $model->pk_int_order_detail_id ?>">Arrived</a>
                     </div>
-                <div id="successalert"></div>
+                <div id="successalert<?= $model->pk_int_order_detail_id ?>"></div>
                                    
     
                 </div> 
@@ -190,34 +191,33 @@ $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
                 <script type="text/javascript">
                    
                   $(document).ready(function(){
-                 
-                    $("#btnpending").click(function(){
-                        $("#successalert").load("index.php?r=order/ajax&id=<?= $model->fkIntOrder->pk_int_order_id ?>&status=1");
-                        $("#btnpending").css("background-color", "#30cb00"); 
-                        $("#btnpacked").css("background-color", "#5BC0DE");
-                        $("#btnshipped").css("background-color", "#5BC0DE");
-                        $("#btnarrived").css("background-color", "#5BC0DE");     
+                    $("#btnpending<?= $model->pk_int_order_detail_id ?>").click(function(){
+                        $("#successalert<?= $model->pk_int_order_detail_id ?>").load("index.php?r=order/ajax&id=<?= $model->pk_int_order_detail_id ?>&status=1");
+                        $("#btnpending<?= $model->pk_int_order_detail_id ?>").css("background-color", "#30cb00"); 
+                        $("#btnpacked<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");
+                        $("#btnshipped<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");
+                        $("#btnarrived<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");     
                     });
-                    $("#btnpacked").click(function(){
-                        $("#successalert").load("index.php?r=order/ajax&id=<?= $model->fkIntOrder->pk_int_order_id ?>&status=2");
-                        $("#btnpending").css("background-color", "#5BC0DE"); 
-                        $("#btnpacked").css("background-color", "#30cb00");
-                        $("#btnshipped").css("background-color", "#5BC0DE");
-                        $("#btnarrived").css("background-color", "#5BC0DE");       
+                    $("#btnpacked<?= $model->pk_int_order_detail_id ?>").click(function(){
+                        $("#successalert<?= $model->pk_int_order_detail_id ?>").load("index.php?r=order/ajax&id=<?= $model->pk_int_order_detail_id ?>&status=2");
+                        $("#btnpending<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE"); 
+                        $("#btnpacked<?= $model->pk_int_order_detail_id ?>").css("background-color", "#30cb00");
+                        $("#btnshipped<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");
+                        $("#btnarrived<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");       
                     });
-                    $("#btnshipped").click(function(){
-                        $("#successalert").load("index.php?r=order/ajax&id=<?= $model->fkIntOrder->pk_int_order_id ?>&status=3");
-                        $("#btnpending").css("background-color", "#5BC0DE"); 
-                        $("#btnpacked").css("background-color", "#5BC0DE");
-                        $("#btnshipped").css("background-color", "#30cb00");
-                        $("#btnarrived").css("background-color", "#5BC0DE");       
+                    $("#btnshipped<?= $model->pk_int_order_detail_id ?>").click(function(){
+                        $("#successalert<?= $model->pk_int_order_detail_id ?>").load("index.php?r=order/ajax&id=<?= $model->pk_int_order_detail_id ?>&status=3");
+                        $("#btnpending<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE"); 
+                        $("#btnpacked<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");
+                        $("#btnshipped<?= $model->pk_int_order_detail_id ?>").css("background-color", "#30cb00");
+                        $("#btnarrived<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");       
                     });
-                    $("#btnarrived").click(function(){
-                        $("#successalert").load("index.php?r=order/ajax&id=<?= $model->fkIntOrder->pk_int_order_id ?>&status=4");
-                        $("#btnpending").css("background-color", "#5BC0DE"); 
-                        $("#btnpacked").css("background-color", "#5BC0DE");
-                        $("#btnshipped").css("background-color", "#5BC0DE");
-                        $("#btnarrived").css("background-color", "#30cb00");       
+                    $("#btnarrived<?= $model->pk_int_order_detail_id ?>").click(function(){
+                        $("#successalert<?= $model->pk_int_order_detail_id ?>").load("index.php?r=order/ajax&id=<?= $model->pk_int_order_detail_id ?>&status=4");
+                        $("#btnpending<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE"); 
+                        $("#btnpacked<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");
+                        $("#btnshipped<?= $model->pk_int_order_detail_id ?>").css("background-color", "#5BC0DE");
+                        $("#btnarrived<?= $model->pk_int_order_detail_id ?>").css("background-color", "#30cb00");       
                     });
                 });
                 </script>
@@ -241,7 +241,8 @@ $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
                         <h4>Product Details:</h4>
                            <h5><?=$model->fkIntProduct->vchr_description?></h5>
                            <div id="successalert"></div>
-                   </div> </div></div></body>
+                   </div> </div></div></div>
+                   <?php } ?></div></body>
                     </br>
 
 </div>

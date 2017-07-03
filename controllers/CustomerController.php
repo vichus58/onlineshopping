@@ -296,9 +296,6 @@ class CustomerController extends Controller
                 $cart_data_buy=$session->get('cart');
                 if($cart_data_buy!=null)
                 {
-                    foreach ($cart_data_buy as $key => $value) 
-                    {
-                           
                             $modelOrder = new TblOrder();
                             $modelOrder->fk_int_customer_id = Yii::$app->user->identity->pk_int_customer_id;
                             $modelOrder->date_date = new \yii\db\Expression('NOW()');
@@ -306,6 +303,8 @@ class CustomerController extends Controller
 
                             $lastOrder = $modelOrder->getLastRow();
 
+                    foreach ($cart_data_buy as $key => $value) 
+                    {
                             $modelOrderDetail = new TblOrderDetail();
                             $modelOrderDetail->fk_int_order_id = $lastOrder->pk_int_order_id;
                             $modelOrderDetail->fk_int_product_id = $key;
@@ -341,7 +340,7 @@ class CustomerController extends Controller
 
     public function actionOrderdetail()
     {
-        $modeltblorderdetail = new TblOrderDetail;
+        $modeltblorderdetail = new TblOrder;
         $dataProvider = $modeltblorderdetail->getfullOrder();
         return $this->render('vieworder', [
             'dataProvider' => $dataProvider,
@@ -378,42 +377,12 @@ class CustomerController extends Controller
             $lastid=$model['pk_int_product_id'];
             $response_data = $modelProducts->getNextAjaxItem($lastid);
 
-
-
-
 //////////////////////
-
-
-    $html_data='';
-
-
 
             if($offseter<$count)
             {
-                    $i=3;
-                    foreach ($response_data as $models) {
-                     $in=$models->pk_int_product_id;
-                     if($i%3==0)
-                    $html_data.='<div id="content" class="row" style="text-align: center;"> <ul>';
-                     $i+=1;
-                        
-                        $html_data.='<li style="display: block;">';
-                         $html_data.="<div onclick=location.href='index.php?r=customer/view&id=$in'".' class="col-lg-4">';
-                        $html_data.='<img src="'.$models->product_pic.'" height="200" width="200">';
-                             $html_data.='<h4>'.$models->vchr_item_name.' </h4>';
-                             $description_data=$models->vchr_description;
-                             $descri=(strlen($description_data)<=50) ? $description_data : substr($description_data, 0, 50).'.....';
-                             $html_data.='<p>'.$descri.'</p>';
-                             $html_data.='<p>'."price ".$models->int_item_price."/-".'</p>';
-                             $html_data.='</div>';
-                             $html_data.='</li>';
-                             if($i%3==0)
-                             $html_data.='</ul> </div>';
-                        }
-
-                            if($i%3!=0)
-                            $html_data.='</ul> </div>';
-
+                    
+                        $html_data=$this->makePage($response_data);
                             return \yii\helpers\Json::encode(                
                             [
                              
@@ -471,9 +440,30 @@ class CustomerController extends Controller
 //////////////////////
 
 
-    $html_data='';
+                $html_data=$this->makePage($response_data);
 
-                    $i=3;
+                    
+
+                            return \yii\helpers\Json::encode(                
+                            [
+                             
+                                ['test'=>$html_data,
+                                 'id'=>1,
+                                 ],
+                            // ['test'=>$count,
+                            //      'id'=>1,
+                            //      ],
+
+                            ]
+                            );            
+    
+    }
+
+
+    protected function makePage($response_data)
+    {
+                $html_data='';
+                $i=3;
                     foreach ($response_data as $models) {
                      $in=$models->pk_int_product_id;
                      if($i%3==0)
@@ -497,19 +487,24 @@ class CustomerController extends Controller
                             if($i%3!=0)
                             $html_data.='</ul> </div>';
 
-                            return \yii\helpers\Json::encode(                
-                            [
-                             
-                                ['test'=>$html_data,
-                                 'id'=>1,
-                                 ],
-                            // ['test'=>$count,
-                            //      'id'=>1,
-                            //      ],
-
-                            ]
-                            );            
-    
+                    return $html_data;
     }
+
+
+
+    public function actionViewindividualorder($id)
+    {
+        $modeltblorderdetail = new TblOrderDetail;
+        $models = $modeltblorderdetail->getfullOrder($id);
+        // var_dump($models);
+        // die;
+        return $this->render('viewindividualorder', [
+            'models' => $models,
+        ]);
+    }
+
+
+
+
 
 }

@@ -15,41 +15,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'rowOptions' => function ($dataProvider) {
-              if ($dataProvider['pk_int_status_id'] == '1') {
-                  return ['style' => 'background-color:#F25050;'];
-              }
-              if ($dataProvider['pk_int_status_id'] == '2') {
-                  return ['style' => 'background-color:#ffff40;'];
-              }
-              if ($dataProvider['pk_int_status_id'] == '3') {
-                  return ['style' => 'background-color:#3EACFF;'];
-              }
-              if ($dataProvider['pk_int_status_id'] == '4') {
-                  return ['style' => 'background-color:#4AE54A;'];
-              }
-          },
+        // 'rowOptions' => function ($dataProvider) {
+        //       if ($dataProvider['pk_int_status_id'] == '1') {
+        //           return ['style' => 'background-color:#F25050;'];
+        //       }
+        //       if ($dataProvider['pk_int_status_id'] == '2') {
+        //           return ['style' => 'background-color:#ffff40;'];
+        //       }
+        //       if ($dataProvider['pk_int_status_id'] == '3') {
+        //           return ['style' => 'background-color:#3EACFF;'];
+        //       }
+        //       if ($dataProvider['pk_int_status_id'] == '4') {
+        //           return ['style' => 'background-color:#4AE54A;'];
+        //       }
+        //   },
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
             'pk_int_order_id',
-            'pk_int_product_id',
-            'vchr_item_name', 
-            'int_quantity',
-            [
-            'label'=>'Price',
-            'format' => 'raw',
-            'value' => function ($dataProvider) {
-                $total=0;
-                $price=(int)$dataProvider['int_item_price'];
-                $quantity=(int)$dataProvider['int_quantity'];
-                for($i=1;$i<=$quantity;$i++)
-                {
-                    $total = $total + $price;
-                }
-                return $total;
-            },
-            ],
-            'vchr_status', 
+            'date_date', 
             // 'fk_int_size_id',
 
                           [

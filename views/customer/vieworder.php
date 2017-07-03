@@ -18,27 +18,32 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
             'pk_int_order_id',
-            'pk_int_product_id',
-            'vchr_item_name', 
-            'int_quantity',
-            [
-            'label'=>'Price',
-            'format' => 'raw',
-            'value' => function ($dataProvider) {
-                $total=0;
-                $price=(int)$dataProvider['int_item_price'];
-                $quantity=(int)$dataProvider['int_quantity'];
-                for($i=1;$i<=$quantity;$i++)
-                {
-                    $total = $total + $price;
-                }
-                return $total;
-            },
-            ],
-            'vchr_status', 
+            'date_date',
             // 'fk_int_size_id',
 
-            //['class' => 'yii\grid\ActionColumn'],
+                        [
+                          //changing default action column to delete and update
+                          'class' => 'yii\grid\ActionColumn',
+                          //heading of the action column
+                          'header' => 'Actions',
+                          'headerOptions' => ['style' => 'color:#000000','style' => 'width:20%'],//'color:#337ab7'],
+                          'footer' => '',
+                          //buttons update,delete,view
+                          'template' => '{view}',//{delete}',
+                          'buttons' => [
+                                         'view' => function ($url, $dataProvider) {
+                                            return Html::a('<span class="glyphicon glyphicon-eye-open blue"></span>', $url, [
+                                                        'title' => Yii::t('app', 'update'),
+                                            ]);
+                                         },
+                                      ],
+                          'urlCreator' => function ($action, $dataProvider, $key, $index) {
+                            if ($action === 'view') {
+                                $url ='index.php?r=customer/viewindividualorder&id='.$dataProvider['pk_int_order_id'];
+                                return $url;
+                            }
+                          }
+                          ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

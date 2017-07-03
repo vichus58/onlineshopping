@@ -227,3 +227,22 @@
 													background-color:#51CEBA;
 													border:none;
 												}
+
+												.navbar-center {
+												    position: absolute;
+												    left: 25%;
+												    transform: translatex(10%);
+												}
+
+												.btn-colour-order{
+                                                    background-color:#30cb00;
+                                                }
+
+                                                .anchor-colour{
+                                                    color: #000000;
+                                                }
+
+
+                                                .btn-colour-order2{
+                                                    background-color: #5BC0DE;
+                                                }

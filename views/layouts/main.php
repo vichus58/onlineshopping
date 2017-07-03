@@ -158,11 +158,11 @@ $menu_bar.='</div>';
                              document.getElementById('changeid').insertAdjacentHTML('beforeend',dataArray['test']);
 
                          }
-                     });
-                
+                     }); 
             }
             else
             {
+                $('#changeid').empty();
                 $.ajax({
                         url: '<?php echo \Yii::$app->getUrlManager()->createUrl('customer/search') ?>',
                         type: 'POST',
@@ -183,7 +183,7 @@ $menu_bar.='</div>';
 <?php
                 
 echo $menu_bar;
-echo  "<form class='navbar-form navbar-left' action='javascript:search();'>
+echo  "<form class='navbar-form navbar-center' style='z-index:7777;' action='javascript:search();'>
       <div class=form-group>
         <input type='text' id='texter' onkeyup='search()' maxlength='20' class='form-control' placeholder='Search'> 
       </div>
@@ -193,17 +193,10 @@ echo  "<form class='navbar-form navbar-left' action='javascript:search();'>
     </form>";
     ///*onkeypress event can also apply*/
 
-    $menucart= [
-        ['label' => 'Cart('.$cart_size.')' ,'options'=>['id'=>'cartcount'] , 'url' => ['/customer/viewcart'],'linkOptions'=>['id'=>'cartclear'],],
+    // $menucart= [
+    //     ['label' => 'Cart('.$cart_size.')' ,'options'=>['id'=>'cartcount'] , 'url' => ['/customer/viewcart'],'linkOptions'=>['id'=>'cartclear'],],
 
-    ];
-    
-
-            // ['label' => 'Home', 'url' => ['/site/index']],
-            // ['label' => 'About', 'url' => ['/site/about']],
-            // ['label' => 'Contact', 'url' => ['/site/contact']],
-
-
+    // ];
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

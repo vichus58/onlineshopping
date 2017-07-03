@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Query;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "tbl_order".
@@ -81,5 +83,34 @@ class TblOrder extends \yii\db\ActiveRecord
                 ->orderBy(['pk_int_order_id'=>SORT_DESC,])
                 ->limit(1)
                 ->one();
+    }
+
+
+    public function getFullOrder()
+    {
+        $query = new Query; 
+        return new ActiveDataProvider([
+            'query' => $query
+                            ->select('*')
+                            ->from('tbl_order')
+                            ->where(['fk_int_customer_id'=> Yii::$app->user->identity->pk_int_customer_id]),
+            'pagination' => [
+                    'pageSize' => 20,
+                ],
+        ]);
+    }
+
+
+    public function getFullOrderAdmin()
+    {
+        $query = new Query; 
+        return new ActiveDataProvider([
+            'query' => $query
+                            ->select('*')
+                            ->from('tbl_order'),
+            'pagination' => [
+                    'pageSize' => 20,
+                ],
+        ]);
     }
 }

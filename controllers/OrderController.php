@@ -4,13 +4,14 @@ namespace app\controllers;
 
 use app\models\TblOrderDetail;
 use app\models\TblOrderDetailStatus;
+use app\models\TblOrder;
 
 
 class OrderController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-    	$modeltblorderdetail = new TblOrderDetail;
+    	$modeltblorderdetail = new TblOrder;
         $dataProvider = $modeltblorderdetail->getfullOrderAdmin();
         return $this->render('viewfullorder',[
         	'dataProvider' => $dataProvider,
@@ -21,11 +22,11 @@ class OrderController extends \yii\web\Controller
     public function actionView($id)
     {
     	$modeltblorderdetail = new TblOrderDetail;
-    	$model = $modeltblorderdetail->getById($id);
-         // var_dump($model);
+    	$models = $modeltblorderdetail->getById($id);
+          // var_dump($models);
          // die;
          return $this->render('vieworderitem',[
-         	'model' => $model,
+         	'models' => $models,
          	]);
     }
 
@@ -34,7 +35,7 @@ class OrderController extends \yii\web\Controller
     {
     	$modeltblorderdetail = new TblOrderDetail;
     	$modeltblorderdetailstatus = new TblOrderDetailStatus;
-    	$modeldetail = $modeltblorderdetail->getById($id);
+    	$modeldetail = $modeltblorderdetail->getByDetailId($id);
     	$modeldetail->fk_int_status_id=(int)$status;
     	$modeldetail->update(false);
     	$modelstatus = $modeltblorderdetailstatus->getById($id);
