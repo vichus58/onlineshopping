@@ -183,11 +183,11 @@ $menu_bar.='</div>';
 <?php
                 
 echo $menu_bar;
-echo  "<form class='navbar-form navbar-left'>
+echo  "<form class='navbar-form navbar-left' action='javascript:search();'>
       <div class=form-group>
         <input type='text' id='texter' onkeyup='search()' maxlength='20' class='form-control' placeholder='Search'> 
       </div>
-      <button type=submit class='btn btn-success'>
+      <button type=submit value=submit class='btn btn-success'>
 <span class='glyphicon glyphicon-search'></span>
 </button>
     </form>";
