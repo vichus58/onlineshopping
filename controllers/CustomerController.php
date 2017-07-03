@@ -384,7 +384,7 @@ class CustomerController extends Controller
 //////////////////////
 
 
-$html_data='';
+    $html_data='';
 
 
 
@@ -448,4 +448,68 @@ $html_data='';
 
             }              
     }
+
+
+
+    public function actionSearch()
+    {   
+            $modelProducts = new TblProduct;
+            $post_data=Yii::$app->request->post();
+            $data=(string)$post_data['test'];
+            if($data=='int_id')
+            {
+                $response_data = $modelProducts->getAllProduct();
+            }
+            else
+            {
+                $response_data = $modelProducts->getSearchProduct($data);
+            }
+
+
+
+
+//////////////////////
+
+
+    $html_data='';
+
+                    $i=3;
+                    foreach ($response_data as $models) {
+                     $in=$models->pk_int_product_id;
+                     if($i%3==0)
+                    $html_data.='<div id="content" class="row" style="text-align: center;"> <ul>';
+                     $i+=1;
+                        
+                        $html_data.='<li style="display: block;">';
+                         $html_data.="<div onclick=location.href='index.php?r=customer/view&id=$in'".' class="col-lg-4">';
+                        $html_data.='<img src="'.$models->product_pic.'" height="200" width="200">';
+                             $html_data.='<h4>'.$models->vchr_item_name.' </h4>';
+                             $description_data=$models->vchr_description;
+                             $descri=(strlen($description_data)<=50) ? $description_data : substr($description_data, 0, 50).'.....';
+                             $html_data.='<p>'.$descri.'</p>';
+                             $html_data.='<p>'."price ".$models->int_item_price."/-".'</p>';
+                             $html_data.='</div>';
+                             $html_data.='</li>';
+                             if($i%3==0)
+                             $html_data.='</ul> </div>';
+                        }
+
+                            if($i%3!=0)
+                            $html_data.='</ul> </div>';
+
+                            return \yii\helpers\Json::encode(                
+                            [
+                             
+                                ['test'=>$html_data,
+                                 'id'=>1,
+                                 ],
+                            // ['test'=>$count,
+                            //      'id'=>1,
+                            //      ],
+
+                            ]
+                            );            
+    
+    }
+
 }

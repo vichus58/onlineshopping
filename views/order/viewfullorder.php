@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                           'template' => '{view}',//{delete}',
                           'buttons' => [
                                          'view' => function ($url, $dataProvider) {
-                                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                                            return Html::a('<span class="glyphicon glyphicon-eye-open blue"></span>', $url, [
                                                         'title' => Yii::t('app', 'update'),
                                             ]);
                                          },

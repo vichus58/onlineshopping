@@ -67,10 +67,10 @@ AppAsset::register($this);
 
     NavBar::begin([
         'brandLabel' => '<img src='.Url::to('uploads/logo.png')
-.' style="display:inline; vertical-align: top; height:180%; margin-top:-20%;">',
+        .' style="display:inline; vertical-align: top; height:180%; margin-top:-20%;">',
         'brandUrl' => $url,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-default navbar-fixed-top nav-custom',
         ],
     ]);
 
@@ -88,12 +88,13 @@ if(!Yii::$app->user->isGuest)
 }
 
 
+
 if(Yii::$app->user->isGuest)
 {
     $menu_bar_1='<div class="navbar-nav navbar-right">';
     $menu_bar_1.=
-            '<div class="dropdown">
-                  <button class="dropbtn">Cart('.$cart_size.')</button>
+            '<div class="dropdown nav-items">
+                  <button class="dropbtn nav-items">Cart('.$cart_size.')</button>
                   <div class="dropdown-content">'
                   .'<a href="index.php?r=customer/viewcart">View Cart</a>'
                   .'</div>
@@ -134,9 +135,63 @@ if(!Yii::$app->user->isGuest and Yii::$app->CheckAdmin->isAdmin())
 
 
 $menu_bar.='</div>';
+?>
+    <script>
+        function search()
+        {
+            var textbox = document.getElementById('texter').value;
+            // var textvalue = textbox.value;
+            // alert(textbox);
+            if(textbox!='')
+            {
+                $('#changeid').empty();
+                $.ajax({
+                        url: '<?php echo \Yii::$app->getUrlManager()->createUrl('customer/search') ?>',
+                        type: 'POST',
+                         data: { test: textbox },
+                         success: function(data) {
+                             // alert(data);
+                                    //alert('ajax ready');
+                             myArr = JSON.parse(data);
+                             var dataArray=myArr[0];
+                             //alert(dataArray['test']);
+                             document.getElementById('changeid').insertAdjacentHTML('beforeend',dataArray['test']);
+
+                         }
+                     });
+                
+            }
+            else
+            {
+                $.ajax({
+                        url: '<?php echo \Yii::$app->getUrlManager()->createUrl('customer/search') ?>',
+                        type: 'POST',
+                         data: { test: 'int_id' },
+                         success: function(data) {
+                             //alert(data);
+                                    //alert('ajax ready');
+                             myArr = JSON.parse(data);
+                             var dataArray=myArr[0];
+                             //alert(dataArray['test']);
+                             document.getElementById('changeid').insertAdjacentHTML('beforeend',dataArray['test']);
+
+                         }
+                     });
+            }
+        }
+    </script>
+<?php
                 
 echo $menu_bar;
-
+echo  "<form class='navbar-form navbar-left'>
+      <div class=form-group>
+        <input type='text' id='texter' onkeyup='search()' maxlength='20' class='form-control' placeholder='Search'> 
+      </div>
+      <button type=submit class='btn btn-success'>
+<span class='glyphicon glyphicon-search'></span>
+</button>
+    </form>";
+    ///*onkeypress event can also apply*/
 
     $menucart= [
         ['label' => 'Cart('.$cart_size.')' ,'options'=>['id'=>'cartcount'] , 'url' => ['/customer/viewcart'],'linkOptions'=>['id'=>'cartclear'],],
@@ -170,7 +225,7 @@ echo $menu_bar;
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container" id="changeid">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

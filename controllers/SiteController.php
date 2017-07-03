@@ -83,9 +83,10 @@ class SiteController extends Controller
                 // open a session
                 $session->open();
             }
-            $buyflag=$session->get('buyflag');
+        $buyflag=$session->get('buyflag');
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if(!Yii::$app->CheckAdmin->isAdmin())
             {
@@ -105,7 +106,7 @@ class SiteController extends Controller
             }
             else
             {
-                    return $this->redirect(['site/index']);
+                return $this->redirect(['site/index']);
             }
         }
         return $this->render('login', [
@@ -120,7 +121,7 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-         $session = Yii::$app->session;
+        $session = Yii::$app->session;
 
             // check if a session is already open
             if (!$session->isActive)

@@ -1,3 +1,12 @@
+												
+/*
+* @author  :vishnu prasad vs;
+* @date    :2/7/2017;
+* @css classes for easy usage
+*/
+
+
+
 												li{list-style-type: '';}
 
 					    						ul{list-style-type: '';}
@@ -147,8 +156,8 @@
 
 
 												.dropbtn {
-												    background-color: #222222;
-												    color: #9D9D9D;
+													background-color:#51CEBA;
+												    color: black;
 												    padding: 15px;
 												    font-size: 14px;
 												    border: none;
@@ -180,7 +189,9 @@
 												}
 
 
-												.dropdown-content a:hover {background-color: #A8B9A8}
+												.dropdown-content a:hover {
+													background-color: #A8B9A8
+												}
 
 
 												.dropdown:hover .dropdown-content {
@@ -189,8 +200,8 @@
 
 
 												.dropdown:hover .dropbtn {
-												    background-color: #222222;
-												    color: white;
+												    background-color: #A1CEBA;
+												    color: #AFEEFB;
 												    size:20;
 												}
 
@@ -205,4 +216,14 @@
 
 												.linker:hover {
 													background-color: #A8B9A8;
+												}
+
+
+												.blue {
+												    color: black;
+												}
+
+												.nav-custom{
+													background-color:#51CEBA;
+													border:none;
 												}

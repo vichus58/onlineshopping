@@ -4,6 +4,9 @@ namespace app\models;
 
 use Yii;
 
+use yii\db\Query;
+use yii\data\ActiveDataProvider;
+
 /**
  * This is the model class for table "tbl_product".
  *
@@ -157,5 +160,23 @@ class TblProduct extends \yii\db\ActiveRecord
         ->where(['pk_int_product_id' => $id])
         ->one();
     }
-    
+
+
+    public function getAllProduct()
+    {
+         return TblProduct::find()
+                ->all();
+    }
+
+    public function getSearchProduct($string)
+    {
+
+         return TblProduct::find()
+         ->leftJoin('tbl_category', 'tbl_product.fk_int_category_id = tbl_category.pk_int_category_id')
+         ->leftJoin('tbl_sub_category', 'tbl_product.fk_int_sub_category_id = tbl_sub_category.pk_int_sub_category_id')
+         ->where(['like', 'vchr_item_name', $string])
+         ->orWhere(['like', 'tbl_category.vchr_category_name', $string])
+         ->orWhere(['like', 'tbl_sub_category.vchr_sub_category_name', $string])
+         ->all();
+    }
 }
