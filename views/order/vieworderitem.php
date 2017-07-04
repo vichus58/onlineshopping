@@ -114,7 +114,7 @@ $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
                 <h4>Status</h4>
                 <div class="row">
                     <div class="col-lg-6">
-                    
+
                     <?php if($model->fkIntStatus->vchr_status=='Pending')
                     { ?>
                         <a class = "btn btn-colour-special" style="padding: 2px;width: 50%;" id="btnpending<?= $model->pk_int_order_detail_id ?>">Pending</a> 
@@ -141,9 +141,9 @@ $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
                         <a class = "btn btn-colour-regular" style="padding: 2px;width: 50%;" id="btnshipped<?= $model->pk_int_order_detail_id ?>">Shipped</a>
                     <?php } ?>
 
-                    <?php if($model->fkIntStatus->vchr_status=='Shipped')
+                    <?php if($model->fkIntStatus->vchr_status=='Arrived')
                     { ?>
-                        <a class = "btn btn-colour-regular" style="padding: 2px;width: 46%;" id="btnarrived<?= $model->pk_int_order_detail_id ?>">Arrived</a>
+                        <a class = "btn btn-colour-special" style="padding: 2px;width: 46%;" id="btnarrived<?= $model->pk_int_order_detail_id ?>">Arrived</a>
                     <?php }else { ?>
                         <a class = "btn btn-colour-regular" style="padding: 2px;width: 46%;" id="btnarrived<?= $model->pk_int_order_detail_id ?>">Arrived</a>
                     <?php } ?>
