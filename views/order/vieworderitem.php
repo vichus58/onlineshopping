@@ -9,20 +9,31 @@ use app\models\TblProductSize;
 
 
 
-$this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
-
+$this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];                       
 
     $this->registerCss("
                             .round-corners {
-                                            border-radius: 25px;
-                                            // background: #c3c388;
-                                            padding: 20px;
-                                            display: inline-block;
-                                            border:4px solid #aaaa55;
-                                        }
+                                border-radius: 25px;
+                                // background: #c3c388;
+                                padding: 20px;
+                                display: inline-block;
+                                border:4px solid #aaaa55;
+                            }
+
                             .inline-headers h4{
-                              display: inline-block;
-                              vertical-align: baseline;
+                                display: inline-block;
+                                vertical-align: baseline;
+                            }
+
+                            .btn-colour-regular{
+                                background-color: #5BC0DE;
+                            }
+                            .btn-colour-special{
+                                background-color:#30cb00;
+                            }
+
+                            a {
+                                color: #000000;
                             }
                        ");
     ?>
@@ -86,7 +97,7 @@ $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
                     
                     <h4>Select quantity</h4>
                     
-
+            
                     
                     
                 </div>
@@ -97,95 +108,52 @@ $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];
                 
                 </div>
                 <div class="col-lg-6">
-                <?php
-                    // $css='';
-                    //                         if($model->fkIntStatus->vchr_status=='Pending'){
-                    //                             $css.=".btn-colour-pending{
-                    //                                             background-color:#30cb00;
-                    //                                         }
-                    //                                         a {
-                    //                                             color: #000000;
-                    //                                         }";
-                    //                         } else {
-                    //                             $css.=".btn-colour-pending{
-                    //                                             background-color: #5BC0DE;
-                    //                                         }
-                    //                                         a {
-                    //                                             color: #000000;
-                    //                                         }";
-                    //                         }
 
-                    //                         if($model->fkIntStatus->vchr_status=='Packed'){
-                    //                             $css.=".btn-colour-packed{
-                    //                                             background-color:#30cb00;
-                    //                                         }
-                    //                                         a {
-                    //                                             color: #000000;
-                    //                                         }";
-                    //                         } else {
-                    //                             $css.=".btn-colour-packed{
-                    //                                             background-color: #5BC0DE;
-                    //                                         }
-                    //                                         a {
-                    //                                             color: #000000;
-                    //                                         }";
-                    //                         }
 
-                    //                         if($model->fkIntStatus->vchr_status=='Shipped'){
-                    //                             $css.=".btn-colour-shipped{
-                    //                                             background-color:#30cb00;
-                    //                                         }
-                    //                                         a {
-                    //                                             color: #000000;
-                    //                                         }";
-                    //                         } else {
-                    //                             $css.=".btn-colour-shipped{
-                    //                                             background-color: #5BC0DE;
-                    //                                         }
-                    //                                         a {
-                    //                                             color: #000000;
-                    //                                         }";
-                    //                         }
-
-                    //                         if($model->fkIntStatus->vchr_status=='Arrived'){
-                    //                             $css.=".btn-colour-arrived{
-                    //                                             background-color:#30cb00;
-                    //                                         }
-                    //                                         a {
-                    //                                             color: #000000;
-                    //                                         }";
-                    //                         } else {
-                    //                             $css.=".btn-colour-arrived{
-                    //                                             background-color: #5BC0DE;
-                    //                                         }
-                    //                                         a {
-                    //                                             color: #000000;
-                    //                                         }";
-                    //                         }
-                
-                    //     $this->registerCss(
-                    //                         $css
-                    //                        );
-                ?>
                 <br>
                 <h4>Status</h4>
                 <div class="row">
                     <div class="col-lg-6">
-                       <a class = "btn" style="padding: 2px;width: 50%;" id="btnpending<?= $model->pk_int_order_detail_id ?>">Pending</a> 
-                       <a class = "btn" style="padding: 2px;width: 46%;" id="btnpacked<?= $model->pk_int_order_detail_id ?>">Packed</a>
+                    
+                    <?php if($model->fkIntStatus->vchr_status=='Pending')
+                    { ?>
+                        <a class = "btn btn-colour-special" style="padding: 2px;width: 50%;" id="btnpending<?= $model->pk_int_order_detail_id ?>">Pending</a> 
+                    <?php }else { ?>
+                        <a class = "btn btn-colour-regular" style="padding: 2px;width: 50%;" id="btnpending<?= $model->pk_int_order_detail_id ?>">Pending</a>
+                    <?php } ?>
+
+                    <?php if($model->fkIntStatus->vchr_status=='Packed')
+                    { ?>
+                        <a class = "btn btn-colour-special" style="padding: 2px;width: 46%;" id="btnpacked<?= $model->pk_int_order_detail_id ?>">Packed</a>
+                    <?php }else { ?>
+                        <a class = "btn btn-colour-regular" style="padding: 2px;width: 46%;" id="btnpacked<?= $model->pk_int_order_detail_id ?>">Packed</a>
+                    <?php } ?>
+
                     </div>
                 </div>
                 <div class="row" style="padding-top: 3px;">
                     <div class="col-lg-6">
-                       <a class = "btn" style="padding: 2px;width: 50%;" id="btnshipped<?= $model->pk_int_order_detail_id ?>">Shipped</a>
-                       <a class = "btn" style="padding: 2px;width: 46%;" id="btnarrived<?= $model->pk_int_order_detail_id ?>">Arrived</a>
+
+                    <?php if($model->fkIntStatus->vchr_status=='Shipped')
+                    { ?>
+                        <a class = "btn btn-colour-special" style="padding: 2px;width: 50%;" id="btnshipped<?= $model->pk_int_order_detail_id ?>">Shipped</a>
+                    <?php }else { ?>
+                        <a class = "btn btn-colour-regular" style="padding: 2px;width: 50%;" id="btnshipped<?= $model->pk_int_order_detail_id ?>">Shipped</a>
+                    <?php } ?>
+
+                    <?php if($model->fkIntStatus->vchr_status=='Shipped')
+                    { ?>
+                        <a class = "btn btn-colour-regular" style="padding: 2px;width: 46%;" id="btnarrived<?= $model->pk_int_order_detail_id ?>">Arrived</a>
+                    <?php }else { ?>
+                        <a class = "btn btn-colour-regular" style="padding: 2px;width: 46%;" id="btnarrived<?= $model->pk_int_order_detail_id ?>">Arrived</a>
+                    <?php } ?>
+
                     </div>
                 <div id="successalert<?= $model->pk_int_order_detail_id ?>"></div>
                                    
     
                 </div> 
                 <br>
-
 
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
                 <script type="text/javascript">
