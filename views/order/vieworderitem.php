@@ -9,29 +9,10 @@ use app\models\TblProductSize;
 
 
 
+
 $this->params['breadcrumbs'][] = ['label' => 'View Item', 'url' => ['index']];                       
 
     $this->registerCss("
-                            .round-corners {
-                                border-radius: 25px;
-                                // background: #c3c388;
-                                padding: 20px;
-                                display: inline-block;
-                                border:4px solid #aaaa55;
-                            }
-
-                            .inline-headers h4{
-                                display: inline-block;
-                                vertical-align: baseline;
-                            }
-
-                            .btn-colour-regular{
-                                background-color: #5BC0DE;
-                            }
-                            .btn-colour-special{
-                                background-color:#30cb00;
-                            }
-
                             a {
                                 color: #000000;
                             }

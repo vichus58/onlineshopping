@@ -234,4 +234,16 @@
 												    transform: translatex(10%);
 												}
 
+												.inline-headers h4{
+					                                display: inline-block;
+					                                vertical-align: baseline;
+					                            }
+
+					                            .btn-colour-regular{
+					                                background-color: #5BC0DE;
+					                            }
+					                            .btn-colour-special{
+					                                background-color:#30cb00;
+					                            }
+
 												

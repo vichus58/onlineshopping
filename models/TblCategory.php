@@ -64,6 +64,6 @@ class TblCategory extends \yii\db\ActiveRecord
 
     public function getCategory()
     {
-        return ArrayHelper::map(TblSubCategory::find()->all(),'pk_int_category_id','vchr_category_name');
+        return ArrayHelper::map(TblCategory::find()->limit(5)->all(),'pk_int_category_id','vchr_category_name');
     }
 }

@@ -15,6 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\TblProductSizeVariants;
 use yii\db\Expression;
+use app\models\TblSubCategory;
 
 
 /**
@@ -504,7 +505,15 @@ class CustomerController extends Controller
     }
 
 
-
+    public function actionCategorywisesearch($cat_id)
+    {
+        $modelTblSubCategory = new TblSubCategory;
+        $models = $modelTblSubCategory->getSubCategoryById($cat_id);
+        $datas = $this->makePage($models);
+        return $this->render('search',[
+            'datas' => $datas,
+            ]);
+    }
 
 
 }

@@ -6,7 +6,7 @@ use yii\bootstrap\Alert;
 use aki\imageslider\ImageSlider;
 
 /* @var $this yii\web\View */
-
+// echo Yii::$app->controller->action->id;
 $this->title = 'Home';
 ?>
 <?php

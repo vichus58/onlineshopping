@@ -10,6 +10,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\helpers\Url;
 use app\models\TblCategory;
+use app\models\TblSubCategory;
 
 AppAsset::register($this);
 ?>
@@ -103,7 +104,9 @@ if(Yii::$app->user->isGuest)
 
 
 if(!Yii::$app->user->isGuest and !Yii::$app->CheckAdmin->isAdmin())
-{
+{   
+    $item_search = menuBuilder();
+    $menu_bar.=$item_search;
     $menu_bar.=
             '<div class="dropdown">
                   <button class="dropbtn">Cart('.$cart_size.')</button>
@@ -135,6 +138,28 @@ if(!Yii::$app->user->isGuest and Yii::$app->CheckAdmin->isAdmin())
 
 
 $menu_bar.='</div>';
+
+
+    function menuBuilder()
+    {
+        $main_menu='';
+        
+        $modelTblcategory = new TblCategory;
+        $modelTblSubcategory = new TblSubCategory;
+        $fullCategory = $modelTblcategory->getCategory();
+        foreach ($fullCategory as $keys => $values) {
+            $fullSubCategory = $modelTblSubcategory->getSubCategory($keys);
+            $main_menu.='<div class="dropdown">
+                  <button class="dropbtn">'.$values.'</button>
+                  <div class="dropdown-content">';
+                foreach ($fullSubCategory as $key => $value) {
+                        $main_menu.='<a href="index.php?r=customer/categorywisesearch&cat_id='.$key.'">'.$value.'</a>';
+            }
+            $main_menu.='</div></div>';
+        }
+        return $main_menu;
+    }
+    
 ?>
     <script>
         function search()

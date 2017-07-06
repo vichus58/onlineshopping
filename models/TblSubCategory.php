@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tbl_sub_category".
@@ -63,5 +64,16 @@ class TblSubCategory extends \yii\db\ActiveRecord
     public function getFkIntCategory()
     {
         return $this->hasOne(TblCategory::className(), ['pk_int_category_id' => 'fk_int_category_id']);
+    }
+
+    public function getSubCategory($keys)
+    {
+        return ArrayHelper::map(TblSubCategory::find()->where(['fk_int_category_id' => $keys])->all(),'pk_int_sub_category_id','vchr_sub_category_name');
+    }
+
+
+    public function getSubCategoryById($id)
+    {
+        return TblProduct::find()->where(['fk_int_sub_category_id' => $id])->all();
     }
 }
