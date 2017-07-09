@@ -497,8 +497,6 @@ class CustomerController extends Controller
     {
         $modeltblorderdetail = new TblOrderDetail;
         $models = $modeltblorderdetail->getfullOrder($id);
-        // var_dump($models);
-        // die;
         return $this->render('viewindividualorder', [
             'models' => $models,
         ]);
@@ -512,6 +510,7 @@ class CustomerController extends Controller
         $datas = $this->makePage($models);
         return $this->render('search',[
             'datas' => $datas,
+            'cat_id' => $cat_id,
             ]);
     }
 

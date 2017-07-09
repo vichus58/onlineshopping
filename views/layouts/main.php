@@ -76,7 +76,7 @@ AppAsset::register($this);
     ]);
 
 
-    $menu_bar='<div class="navbar-nav navbar-right">';
+    $menu_bar='<div class="navbar-nav navbar-collapse navbar-right">';
 
 if(!Yii::$app->user->isGuest)
 {
@@ -89,10 +89,21 @@ if(!Yii::$app->user->isGuest)
 }
 
 
+$text_box_search = "<form class='navbar-form navbar-center' style='position:fixed;display: flex;justify-content: center;float: none;' action='javascript:search();'>
+      <div class='form-group' style='position:fixed;display: flex;justify-content: center;float: none;'>
+        <input type='text' id='texter' onkeyup='search()' maxlength='20' style='width:200%;' class='form-control' placeholder='Search'> 
+        <button type=submit value=submit class='btn btn-success'>
+<span class='glyphicon glyphicon-search'></span>
+</button>
+      </div>
+    </form>";
+
+
 
 if(Yii::$app->user->isGuest)
 {
     $menu_bar_1='<div class="navbar-nav navbar-right">';
+     $menu_bar_1.=$text_box_search;
     $menu_bar_1.=
             '<div class="dropdown nav-items">
                   <button class="dropbtn nav-items">Cart('.$cart_size.')</button>
@@ -105,6 +116,7 @@ if(Yii::$app->user->isGuest)
 
 if(!Yii::$app->user->isGuest and !Yii::$app->CheckAdmin->isAdmin())
 {   
+    $menu_bar.=$text_box_search;
     $item_search = menuBuilder();
     $menu_bar.=$item_search;
     $menu_bar.=
@@ -129,9 +141,55 @@ if(!Yii::$app->user->isGuest and Yii::$app->CheckAdmin->isAdmin())
 {
     $menu_bar.=
             '<div class="dropdown">
+                  <button class="dropbtn">Product</button>
+                  <div class="dropdown-content">'
+                  .'<a href="index.php?r=product/index">View Product</a>'
+                  .'<a href="index.php?r=product/create">Add Product</a>'
+                  .'</div>
+            </div>';
+
+    $menu_bar.=
+            '<div class="dropdown">
+                  <button class="dropbtn">Category</button>
+                  <div class="dropdown-content">'
+                  .'<a href="index.php?r=category/index">View Category</a>'
+                  .'<a href="index.php?r=category/create">Add Category</a>'
+                  .'<a href="index.php?r=sub-category/index">View Sub Category</a>'
+                  .'<a href="index.php?r=sub-category/create">Add Sub Category</a>'
+                  .'</div>
+            </div>';
+
+    $menu_bar.=
+            '<div class="dropdown">
+                  <button class="dropbtn">Order</button>
+                  <div class="dropdown-content">'
+                  .'<a href="index.php?r=order/index">View Order</a>'
+                  .'</div>
+            </div>';
+
+    $menu_bar.=
+            '<div class="dropdown">
+                  <button class="dropbtn">Product Size</button>
+                  <div class="dropdown-content">'
+                  .'<a href="index.php?r=product-size-varient/index">View Product Size</a>'
+                  .'<a href="index.php?r=product-size-varient/create">Add Product Size</a>'
+                  .'</div>
+            </div>';
+
+    $menu_bar.=
+            '<div class="dropdown">
+                  <button class="dropbtn">Account</button>
+                  <div class="dropdown-content">'
+                  .'<a href="index.php?r=site/create-admin">Create Admin Account</a>'
+                  .'</div>
+            </div>';
+
+    $menu_bar.=
+            '<div class="dropdown">
                   <button class="dropbtn glyphicon glyphicon-user" style="margin-top:6%;"></button>
-                  <div class="dropdown-content">'.
-                    $logout.
+                  <div class="dropdown-content">'
+                  .'<a href="index.php?r=customer/viewcart">Change password</a>'
+                  .$logout.
                   '</div>
         </div>';
 }
@@ -208,14 +266,6 @@ $menu_bar.='</div>';
 <?php
                 
 echo $menu_bar;
-echo  "<form class='navbar-form navbar-center' style='z-index:7777;' action='javascript:search();'>
-      <div class=form-group>
-        <input type='text' id='texter' onkeyup='search()' maxlength='20' class='form-control' placeholder='Search'> 
-      </div>
-      <button type=submit value=submit class='btn btn-success'>
-<span class='glyphicon glyphicon-search'></span>
-</button>
-    </form>";
     ///*onkeypress event can also apply*/
 
     // $menucart= [

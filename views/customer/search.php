@@ -13,8 +13,12 @@ $this->title = 'Home';
 <body>
 <div class="site-index">
 <div class="row"><div class="col-sm-4">&nbsp;</div></div>
-    <div class="body-content">
+    <div class="body-content row">
+    	<div class="col-sm-2">
+    		
+    	</div>
+    	<div class="col-sm-10">
         	<?php echo $datas; ?>
-
-</div>
+        </div>
+	</div>
 </div></body>
